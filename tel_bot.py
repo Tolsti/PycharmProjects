@@ -1,4 +1,5 @@
 import requests
+from bs4 import BeautifulSoup
 import re
 import time
 import datetime
@@ -20,10 +21,10 @@ def get_updates():
 
 def get_message():
     data = get_updates()
-    
+
     last_obj = data['result'][-1]
     curr_update_id = last_obj['update_id']
-    
+
     update_id = last_obj['update_id']
     global last_upd
     if last_upd != curr_update_id:
@@ -34,7 +35,7 @@ def get_message():
         return message
     # chat_id = data['result'][-1]['message']['chat']['id']
     # message_text = data['result'][-1]['message']['text']
-    
+
     # chat_id = last_obj['message']['chat']['id']
     # message_text = last_obj['message']['text']
     #
@@ -69,6 +70,13 @@ def main():
         else:
             continue
             time.sleep(3)
+
+
+# def get_film():
+#     soup = BeautifulSoup(requests.get('https://afisha.tut.by/film/').text, 'lxml')
+#
+#     return soup.find('div', class_='events-block js-cut_wrapper').find('a', class_='media')
+
 
 
 def get_money(cur_abbreviation):
